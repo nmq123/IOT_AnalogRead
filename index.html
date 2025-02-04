@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>ESP8266 Sensor Data</title>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        padding: 20px;
+      }
+      h1 {
+        color: #007bff;
+      }
+      .data-box {
+        font-size: 24px;
+        margin-top: 20px;
+        padding: 10px;
+        background-color: #f4f4f4;
+        display: inline-block;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>ESP8266 Sensor Data</h1>
+    <p>Temperature: <span id="temperature">Loading...</span> °C</p>
+    <p>Humidity: <span id="humidity">Loading...</span> %</p>
+
+    <script>
+      var firebaseConfig = {
+        apiKey: "YOURAIzaSyCU2Pu9ACccPJlLq-x7rq_9xGbgFJG3kLk",
+        authDomain: "esp8266-readanalog.firebaseapp.com",
+        databaseURL:
+          "https://esp8266-readanalog-default-rtdb.asia-southeast1.firebasedatabase.app",
+        projectId: "esp8266-readanalog",
+        storageBucket: "esp8266-readanalog.appspot.com",
+        messagingSenderId: "832748731693",
+        appId: "1:832748731693:web:232c266743b52909e927a4",
+      };
+
+      firebase.initializeApp(firebaseConfig);
+      var database = firebase.database();
+
+      function updateData(snapshot) {
+        document.getElementById("temperature").innerText =
+          snapshot.val().temperature;
+        document.getElementById("humidity").innerText = snapshot.val().humidity;
+      }
+
+      var sensorRef = database.ref("/sensors");
+      sensorRef.on("value", (snapshot) => updateData(snapshot));
+    </script>
+  </body>
+</html>
