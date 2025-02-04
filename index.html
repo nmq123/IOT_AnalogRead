@@ -4,158 +4,30 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SHIELD-FFDS</title>
+
+    <!-- Firebase Scripts -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+    <!-- Favicon -->
     <link
       rel="shortcut icon"
       href="https://i.pinimg.com/564x/b0/cc/c3/b0ccc32d6d810d5489bf8ce7b699e64d.jpg"
       type="image/x-icon"
     />
 
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        background-color: #eef;
-      }
-      .hex-container {
-        display: grid;
-        grid-template-columns: repeat(4, 100px);
-        grid-template-rows: repeat(4, 100px);
-        gap: 30px;
-        position: relative;
-      }
-      .water-area {
-        position: absolute;
-        width: 120px;
-        height: 120px;
-        background-color: rgba(72, 193, 241, 0.3);
-        border-radius: 50%;
-        transition: transform 0.5s ease-in-out;
-        left: -50px;
-        top: -50px;
-        z-index: -3;
-      }
-      .trapezium {
-        position: absolute;
-        background-color: rgba(72, 193, 241, 0.3);
-        transform-origin: center;
-        transition: all 0.5s ease-in-out;
-      }
-
-      .arrow {
-        position: absolute;
-        width: 24px;
-        height: 6px;
-        background-color: rgb(255, 238, 0);
-        transform-origin: left;
-        transition: transform 0.5s ease-in-out;
-        left: 10px;
-        top: 36%;
-        z-index: -1;
-      }
-      .arrow::after {
-        content: "";
-        position: absolute;
-        right: -10px;
-        top: -2px;
-        width: 0;
-        height: 0;
-        border-left: 10px solid rgb(255, 217, 0);
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
-      }
-      .node {
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-        background-color: red;
-        position: absolute;
-        z-index: auto;
-      }
-      .water-indicator {
-        position: absolute;
-        top: -35px;
-        font-weight: bold;
-      }
-    </style>
+    <!-- CSS File -->
+    <link rel="stylesheet" href="/style.css" />
   </head>
   <body>
+    <h1>ESP8266 Sensor Data</h1>
+    <p>Temperature: <span id="temperature">Loading...</span> °C</p>
+    <p>Humidity: <span id="humidity">Loading....</span> %</p>
     <div class="hex-container" id="hex-container">
       <!-- Nodes will be generated dynamically -->
     </div>
 
-    <script>
-      // Firebase Config (Replace with actual config)
-      var firebaseConfig = {
-        apiKey: "YOURAIzaSyCU2Pu9ACccPJlLq-x7rq_9xGbgFJG3kLk",
-        authDomain: "esp8266-readanalog.firebaseapp.com",
-        databaseURL:"https://esp8266-readanalog-default-rtdb.asia-southeast1.firebasedatabase.app",
-        projectId: "esp8266-readanalog",
-        storageBucket: "esp8266-readanalog.appspot.com",
-        messagingSenderId: "832748731693",
-        appId: "1:832748731693:web:232c266743b52909e927a4",
-      };
-      firebase.initializeApp(firebaseConfig);
-      var database = firebase.database();
-
-      // Hexagonal positions (Relative Grid Layout)
-      const positions = [
-        [2, 0],
-        [0, 1],
-        [4, 1],
-        [2, 2],
-        [0, 3],
-        [4, 3],
-        [2, 4],
-      ];
-
-      const hexContainer = document.getElementById("hex-container");
-
-      // Generate Nodes
-      positions.forEach((pos, index) => {
-        let node = document.createElement("div");
-        node.classList.add("node");
-        node.style.gridColumn = pos[0] + 1;
-        node.style.gridRow = pos[1] + 1;
-        node.setAttribute("id", "node-" + (index + 1));
-
-        let waterIndicator = document.createElement("div");
-        waterIndicator.classList.add("water-indicator");
-        waterIndicator.innerText = "0 cm";
-        node.appendChild(waterIndicator);
-
-        let arrow = document.createElement("div");
-        arrow.classList.add("arrow");
-        node.appendChild(arrow);
-
-        let waterArea = document.createElement("div");
-        waterArea.classList.add("water-area");
-        node.appendChild(waterArea);
-
-        hexContainer.appendChild(node);
-      });
-
-      // Simulated or Firebase Data Fetch
-      function updateNodes() {
-        for (let i = 1; i <= 7; i++) {
-          let waterLevel = Math.floor(Math.random() * 100);
-          let flowDirection = Math.floor(Math.random() * 360);
-
-          let node = document.getElementById("node-" + i);
-          node.querySelector(".water-indicator").innerText = waterLevel + "cm";
-          node.querySelector(
-            ".arrow"
-          ).style.transform = `rotate(${flowDirection}deg)`;
-          node.querySelector(".water-area").style.transform = `scale(${
-            waterLevel / 50
-          })`;
-        }
-      }
-      setInterval(updateNodes, 1000); // Simulate data update every 2 seconds
-    </script>
+    <!-- JavaScript File -->
+    <script src="/script.js"></script>
   </body>
 </html>
