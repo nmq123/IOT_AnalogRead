@@ -1,18 +1,24 @@
-// 🔥 Firebase Config (Replace with your actual credentials)
 var firebaseConfig = {
-  apiKey: "AIzaSyCU2Pu9ACccPJlLq-x7rq_9xGbgFJG3kLk",
+  apiKey: "YOURAIzaSyCU2Pu9ACccPJlLq-x7rq_9xGbgFJG3kLk",
   authDomain: "esp8266-readanalog.firebaseapp.com",
   databaseURL:
     "https://esp8266-readanalog-default-rtdb.asia-southeast1.firebasedatabase.app",
   projectId: "esp8266-readanalog",
-  storageBucket: "esp8266-readanalog.firebasestorage.app",
+  storageBucket: "esp8266-readanalog.appspot.com",
   messagingSenderId: "832748731693",
   appId: "1:832748731693:web:232c266743b52909e927a4",
 };
 
-// Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 var database = firebase.database();
+
+function updateData(snapshot) {
+  document.getElementById("temperature").innerText = snapshot.val().temperature;
+  document.getElementById("humidity").innerText = snapshot.val().humidity;
+}
+
+var sensorRef = database.ref("/sensors");
+sensorRef.on("value", (snapshot) => updateData(snapshot));
 
 // 🌍 Hexagonal positions (Relative Grid Layout)
 const positions = [
@@ -68,18 +74,7 @@ function updateNodes() {
   }
 }
 
-
-
 // Simulate Data Updates Every 1 Second
 setInterval(updateNodes, 1000);
 
 // Real ESP8266 sensor:
-
-
-function updateData(snapshot) {
-  document.getElementById("temperature").innerText = snapshot.val().temperature;
-  document.getElementById("humidity").innerText = snapshot.val().humidity;
-}
-
-var sensorRef = database.ref("/sensors");
-sensorRef.on("value", (snapshot) => updateData(snapshot));
