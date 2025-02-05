@@ -61,17 +61,17 @@
 
       function updateData(snapshot) {
         document.getElementById("flow_speed1").innerText =snapshot.val().flow_speed1;
-        document.getElementById("flow_direction1").innerText = snapshot.val()flow_direction1;
+        document.getElementById("flow_direction1").innerText = snapshot.val().flow_direction1;
         document.getElementById("pressure1").innerText = snapshot.val().pressure1;
         document.getElementById("water_level1").innerText =snapshot.val().water_level1;
 
         document.getElementById("flow_speed2").innerText =snapshot.val().flow_speed2;
-        document.getElementById("flow_direction2").innerText = snapshot.val()flow_direction2;
+        document.getElementById("flow_direction2").innerText = snapshot.val().flow_direction2;
         document.getElementById("pressure2").innerText = snapshot.val().pressure2;
         document.getElementById("water_level2").innerText =snapshot.val().water_level2;
 
         document.getElementById("flow_speed3").innerText =snapshot.val().flow_speed3;
-        document.getElementById("flow_direction3").innerText = snapshot.val()flow_direction3;
+        document.getElementById("flow_direction3").innerText = snapshot.val().flow_direction3;
         document.getElementById("pressure3").innerText = snapshot.val().pressure3;
         document.getElementById("water_level3").innerText =snapshot.val().water_level3;
       }
