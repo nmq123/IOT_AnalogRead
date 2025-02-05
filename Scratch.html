@@ -32,6 +32,8 @@
 
     <p>Temperature: <span id="temperature">Loading...</span> °C</p>
     <p>Humidity: <span id="humidity">Loading....</span> %</p>
+    <p>Pressure: <span id="humidity">Loading....</span> %</p>
+    <p>Water level: <span id="humidity">Loading....</span> %</p>
 
     <script>
       var firebaseConfig = {
@@ -49,9 +51,10 @@
       var database = firebase.database();
 
       function updateData(snapshot) {
-        document.getElementById("temperature").innerText =
-          snapshot.val().temperature;
+        document.getElementById("temperature").innerText = snapshot.val().temperature;
         document.getElementById("humidity").innerText = snapshot.val().humidity;
+        document.getElementById("Pressure").innerText = snapshot.val().humidity;
+        document.getElementById("Water level").innerText = snapshot.val().humidity;
       }
 
       var sensorRef = database.ref("/sensors");
