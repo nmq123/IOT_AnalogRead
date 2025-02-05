@@ -30,33 +30,50 @@
     ><span style="visibility: hidden">_</span>
     <a href="/IOT_AnalogRead/index.html">FunAnimation</a>
 
-    <p>Temperature: <span id="temperature">Loading...</span> °C</p>
-    <p>Humidity: <span id="humidity">Loading....</span> %</p>
-    <p>Pressure: <span id="humidity">Loading....</span> %</p>
-    <p>Water level: <span id="humidity">Loading....</span> %</p>
+    <p>Flow speed1: <span id="flow_speed1">Loading...</span> °C</p>
+    <p>Flow direction1: <span id="flow_direction1">Loading....</span> %</p>
+    <p>Pressure1: <span id="pressure1">Loading....</span> %</p>
+    <p>Water level1: <span id="water_level1">Loading....</span> %</p><br>
+
+    <p>Flow speed2: <span id="flow_speed2">Loading...</span> °C</p>
+    <p>Flow direction2: <span id="flow_direction2">Loading....</span> %</p>
+    <p>Pressure2: <span id="pressure2">Loading....</span> %</p>
+    <p>Water level2: <span id="water_level2">Loading....</span> %</p><br>
+
+    <p>Flow speed3: <span id="flow_speed3">Loading...</span> °C</p>
+    <p>Flow direction3: <span id="flow_direction3">Loading....</span> %</p>
+    <p>Pressure3: <span id="pressure3">Loading....</span> %</p>
+    <p>Water level3: <span id="water_level3">Loading....</span> %</p><br>
 
     <script>
       var firebaseConfig = {
-        apiKey: "YOURAIzaSyCU2Pu9ACccPJlLq-x7rq_9xGbgFJG3kLk",
+        apiKey: "AIzaSyCU2Pu9ACccPJlLq-x7rq_9xGbgFJG3kLk",
         authDomain: "esp8266-readanalog.firebaseapp.com",
-        databaseURL:
-          "https://esp8266-readanalog-default-rtdb.asia-southeast1.firebasedatabase.app",
+        databaseURL: "https://esp8266-readanalog-default-rtdb.asia-southeast1.firebasedatabase.app",
         projectId: "esp8266-readanalog",
-        storageBucket: "esp8266-readanalog.appspot.com",
+        storageBucket: "esp8266-readanalog.firebasestorage.app",
         messagingSenderId: "832748731693",
-        appId: "1:832748731693:web:232c266743b52909e927a4",
+        appId: "1:832748731693:web:232c266743b52909e927a4"
       };
 
       firebase.initializeApp(firebaseConfig);
       var database = firebase.database();
 
       function updateData(snapshot) {
-        document.getElementById("temperature").innerText =
-          snapshot.val().temperature;
-        document.getElementById("humidity").innerText = snapshot.val().humidity;
-        document.getElementById("Pressure").innerText = snapshot.val().Pressure;
-        document.getElementById("Water level").innerText =
-          snapshot.val().Water_level;
+        document.getElementById("flow_speed1").innerText =snapshot.val().flow_speed1;
+        document.getElementById("flow_direction1").innerText = snapshot.val()flow_direction1;
+        document.getElementById("pressure1").innerText = snapshot.val().pressure1;
+        document.getElementById("water_level1").innerText =snapshot.val().water_level1;
+
+        document.getElementById("flow_speed2").innerText =snapshot.val().flow_speed2;
+        document.getElementById("flow_direction2").innerText = snapshot.val()flow_direction2;
+        document.getElementById("pressure2").innerText = snapshot.val().pressure2;
+        document.getElementById("water_level2").innerText =snapshot.val().water_level2;
+
+        document.getElementById("flow_speed3").innerText =snapshot.val().flow_speed3;
+        document.getElementById("flow_direction3").innerText = snapshot.val()flow_direction3;
+        document.getElementById("pressure3").innerText = snapshot.val().pressure3;
+        document.getElementById("water_level3").innerText =snapshot.val().water_level3;
       }
 
       var sensorRef = database.ref("/sensors");
